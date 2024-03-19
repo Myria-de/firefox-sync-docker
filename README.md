@@ -21,7 +21,7 @@ Die ausführbaren Dateien werden im Home-Verzeichnis im Ordner "bin" installiert
 ```
 source ~/.profile
 ```
-Die Datei „.bashrc“ wird damit ebenfalls neu eingelesen.
+Die Datei ".bashrc" wird damit ebenfalls neu eingelesen.
 
 Damit Docker ohne root-Privilegien Netzwerkports unterhalb von 1024 verwenden kann, muss die Konfiguration mit diesen zwei Zeilen angepasst werden:
 ```
@@ -44,7 +44,7 @@ Laden Sie die Dateien "docker-compose.yaml" und "fxsync.env" herunter.
 
 **Schritt 2:** Aktivieren Sie die Option "Upload", klicken Sie auf "Select file" und wählen Sie die Datei "docker-compose.yaml". Klicken Sie auf "Load variables from .env file" und geben Sie die Datei "fxsync.env" an.
 
-**Schritt 3:** Unterhalb von „Environment variables“ tragen Sie hinter „SYNC_MASTER_SECRET“ und „METRICS_HASH_SECRET“ jeweils eine beliebige, zufällige Zeichenfolge ein, die Sie im Terminal mit
+**Schritt 3:** Unterhalb von "Environment variables" tragen Sie hinter "SYNC_MASTER_SECRET" und "METRICS_HASH_SECRET" jeweils eine beliebige, zufällige Zeichenfolge ein, die Sie im Terminal mit
 ```
 head -c 20 /dev/urandom | sha1sum | awk '{print $1}'
 ```
@@ -65,7 +65,7 @@ http://[Domain]:5000/__heartbeat__
 auf. Sie erhalten vom Server eine Antwort im Json-Format, die mit dem Status "OK", die korrekte Installation bestätigt.
 
 # Firefox für den neuen Sync-Server konfigurieren
-Rufen Sie in Firefox die URL "about:config" auf. Klicken Sie auf „Risiko akzeptieren und fortfahren“ und geben Sie als Suchbegriff identity.sync.tokenserver.uri ein. Ändern Sie die URL auf 
+Rufen Sie in Firefox die URL "about:config" auf. Klicken Sie auf "Risiko akzeptieren und fortfahren“"und geben Sie als Suchbegriff identity.sync.tokenserver.uri ein. Ändern Sie die URL auf 
 ```
 http://[Domain]:5000/1.0/sync/1.5
 ```
