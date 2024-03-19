@@ -45,7 +45,9 @@ Laden Sie die Dateien "docker-compose.yaml" und "fxsync.env" herunter.
 **Schritt 2:** Aktivieren Sie die Option "Upload", klicken Sie auf "Select file" und wählen Sie die Datei "docker-compose.yaml". Klicken Sie auf "Load variables from .env file" und geben Sie die Datei "fxsync.env" an.
 
 **Schritt 3:** Unterhalb von „Environment variables“ tragen Sie hinter „SYNC_MASTER_SECRET“ und „METRICS_HASH_SECRET“ jeweils eine beliebige, zufällige Zeichenfolge ein, die Sie im Terminal mit
+```
 head -c 20 /dev/urandom | sha1sum | awk '{print $1}'
+```
 erzeugen.
 
 Hinter "Domain" gehört der Name des Rechners, über den er im lokalen Netzwerk erreichbar ist. Wie der Name genau lautet, hängt vom Router ab. Bei einer Fritzbox verwenden Sie "http://[Rechnername].fritz.box:5000" bei anderen Modellen beispielsweise "http://[Rechnername].local:5000". Probieren Sie im Terminal mit
