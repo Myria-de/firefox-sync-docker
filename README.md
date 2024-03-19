@@ -65,7 +65,7 @@ http://[Domain]:5000/__heartbeat__
 auf. Sie erhalten vom Server eine Antwort im Json-Format, die mit dem Status "OK", die korrekte Installation bestätigt.
 
 # Firefox für den neuen Sync-Server konfigurieren
-Rufen Sie in Firefox die URL "about:config" auf. Klicken Sie auf "Risiko akzeptieren und fortfahren“"und geben Sie als Suchbegriff identity.sync.tokenserver.uri ein. Ändern Sie die URL auf 
+Rufen Sie in Firefox die URL "about:config" auf. Klicken Sie auf "Risiko akzeptieren und fortfahren""und geben Sie als Suchbegriff identity.sync.tokenserver.uri ein. Ändern Sie die URL auf 
 ```
 http://[Domain]:5000/1.0/sync/1.5
 ```
@@ -74,4 +74,19 @@ Setzen Sie außerdem "services.sync.log.appender.file.logOnSuccess" und "service
 
 Öffnen Sie die URL "about:sync-log". Die letzten Einträge sollten mit "sync-success" beginnen, Fehler werden in den Protokollen "error-sync" angezeigt, die sich per Mausklick öffnen lassen. Bei Problemen prüfen Sie, ob die enthaltenen URLs tatsächlich auf Ihren Server verweisen. Wenn nicht, korrigieren Sie den Wert für "identity.sync.tokenserver.uri". Sollte bei "sync-success" die Mozilla-Adresse "https://token.services.mozilla.com/1.0/sync/1.5" zu sehen sein, starten Sie Firefox neu. Es kann auch helfen, sich vom Mozilla-Konto ab- und wieder anzumelden.
 
+# Eigenen Sync-Server über das Internet nutzen
+Wer den Sync-Server auch unterwegs verwenden will, baut am einfachsten eine VPN-Verbindung ins Heimnetz auf. Sie können dann direkt auf die lokalen Dienste beziehungsweise IP-Adressen zugreifen. Für Nutzer einer Fritzbox empfiehlt es sich, dafür Wireguard zu aktivieren. Eine ausführliche Anleitung lesen Sie unter https://www.pcwelt.de/1181301.
+
+Wer den klassischen Weg bevorzugt, benötigt einen Domainnamen für dynamisches IP und eine Portweiterleitung im Router. Aus Sicherheitsgründen ist es zudem ratsam, einen Reverse Proxy zu installieren, damit der Sync-Server sich nicht direkt aus dem Internet angreifen lässt. Wenn Docker ohnehin schon installiert ist, verwendet man dafür den Nginx Proxy Manager (NPM). Die Datei für die Installation laden Sie über https://m6u.de/DOCK herunter. Auf der Seite finden Sie auch eine kurze Anleitung zu Konfiguration über Portainer.
+
+Einen dynamischen Domainnamen erhalten Fritzbox-Besitzer über den AVM-Dienst Myfritz. Öffnen Sie die Konfigurationsoberfläche über http://fritz.box oder http://192.168.178.1. Gehen Sie auf "Internet -> "MyFRITZ!-Konto". Im folgenden Dialog klicken Sie auf die Schaltfläche "Neues MyFRITZ!-Konto erstellen". Geben Sie im nächsten Schritt Ihre E-Mail-Adresse ein und vergeben Sie ein MyFRITZ!-Kennwort. Diese Zugangsdaten dienen später zur Authentifizierung auf http://myfritz.net. Der Domainname ist anschließend unter "MyFRITZ!-Internetzugriff" zu sehen.
+
+Unter "Internet -> Freigaben" legen Sie die Portweiterleitung auf den Server im lokalen Netzwerk fest. Es genügt, die Ports 80 und 443 zu konfigurieren, wenn der Nginx Proxy Manager zum Einsatz kommt. Darüber kann man auch ein kostenloses SSL-Zertifikat von Letsencrypt beziehen.
+
+Auch andere Router-Hersteller bieten oft einen eigenen Dienst für dynamische Domainnamen an. Wenn nicht, lässt sich in der Regel beispielsweise https://www.noip.com konfigurieren.
+Die Funktion des Sync-Servers prüfen Sie anschließend mit
+```
+http://[Domain]/__heartbeat__
+```
+In Firefox ändern Sie die URL über "identity.sync.tokenserver.uri" auf die neue Domain.
 
