@@ -56,11 +56,17 @@ aus, auf welche Bezeichnung der PC antwortet.
 
 Zum Abschluss klicken Sie auf "Deploy the stack". Mit der angegebenen Konfiguration lädt Portainer das Mozilla-Docker-Image von https://hub.docker.com/r/mozilla/syncstorage-rs herunter. Wir verwenden die nicht ganz aktuelle Version 0.13.6, weil sich neuere Versionen bei unseren Tests nicht einrichten ließen. Zusätzlich installiert Portainer das Datenbanksystem Mariadb, über das der Sync-Server die Daten speichert.
 
-Rufen Sie im Browser die URL http://[Domain]:5000/__heartbeat__ auf. Sie erhalten vom Server eine Antwort im Json-Format, die mit dem Status "OK", die korrekte Installation bestätigt.
+Rufen Sie im Browser die URL
+```
+http://[Domain]:5000/__heartbeat__
+```
+auf. Sie erhalten vom Server eine Antwort im Json-Format, die mit dem Status "OK", die korrekte Installation bestätigt.
 
 # Firefox für den neuen Sync-Server konfigurieren
 Rufen Sie in Firefox die URL "about:config" auf. Klicken Sie auf „Risiko akzeptieren und fortfahren“ und geben Sie als Suchbegriff identity.sync.tokenserver.uri ein. Ändern Sie die URL auf 
+```
 http://[Domain]:5000/1.0/sync/1.5
+```
 
 Setzen Sie außerdem "services.sync.log.appender.file.logOnSuccess" und "services.sync.log.appender.file.logOnError" jeweils auf "true". Starten Sie Firefox neu. Gehen Sie im Menü auf "Extras -> Jetzt synchronisieren". Das Menü lässt sich unter Ubuntu (Gnome) mit der Alt-Taste einblenden.
 
